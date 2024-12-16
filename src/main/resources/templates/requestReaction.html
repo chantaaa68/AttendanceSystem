@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/request.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>申請対応</title>
+	</head>
+	<body>
+		<header>
+			<h1>申請対応画面</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="all-attendance">
+				
+				<div class="head-element">
+					<div class="alert" th:if="${alert != null and alert != ''}">
+						<h2 class="alert-comment" th:text="${alert}"></h2>
+					</div><br>
+				</div>
+				
+				<form id="start" th:action="@{/RequestReaction/{id}(id=${session.employeeForm.id})}" th:object="${requestModel}"  method="post">
+					<input type="hidden" th:field="*{request_id}"/>
+					<input type="hidden" th:field="*{employee_id}"/>
+					<input type="hidden" th:field="*{request_flg}"/>
+					<input type="hidden" th:field="*{reaction_name}"/>
+					
+					<div class="request">
+						
+						<div class="request-detail">
+							<h2>申請者：</h2>
+							<input type="text" class="text"  th:field="*{employee_name}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請区分：</h2>
+							<input type="text" class="text"  th:field="*{request_detail}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請日：</h2>
+							<input type="text" class="text"  th:field="*{request_date}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>対応状況：</h2>
+							<input type="text" class="text"  th:field="*{reaction_detail}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請希望該当日：</h2>
+							<input type="text" class="text"  th:field="*{selected_date}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請理由：</h2>
+							<input type="text" class="text"  th:field="*{request_reason}" readonly>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>対応者コメント：</h2>
+							<input type="text" class="text"  th:field="*{reaction_comment}" >
+						</div><br>
+						
+					</div>
+					
+					<div class="dual-button">
+						<input type="button" onclick="javascript:RequestIndex()" value="戻る"/>
+						
+						<input type="submit" name="accept" th:value="差し戻し"/>
+						
+						<div class="alert" th:if="${requestModel.request_flg == '0'}">
+							<input type="submit" name="reaction_flg" value="打刻修正"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '1'}">
+							<input type="submit" name="reaction_flg" value="更新画面へ"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '2'}">
+							<input type="submit" name="reaction_flg" value="登録画面へ"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '3'}">
+							<input type="submit" name="reaction_flg" value="有給承認"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '4'}">
+							<input type="submit" name="reaction_flg" value="午前休承認"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '5'}">
+							<input type="submit" name="reaction_flg" value="午後休承認"/>
+						</div>
+						<div class="alert" th:if="${requestModel.request_flg == '6'}">
+							<input type="submit" name="reaction_flg" value="後日休申請"/>
+						</div>
+					</div>
+				</form>
+			</div>
+			
+		</main>
+	</body>
+</html>

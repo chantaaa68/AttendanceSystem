@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/list.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>労働者管理</title>
+	</head>
+	<body>
+		<header>
+			<h1>労働者管理</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			
+			<div class="head-element">
+				<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+				</div><br>
+				
+				<div class="button-list">
+					<div class="sort-button" th:if="${session.employeeForm.authority}">
+						<form class="sort" th:action="@{/Sort}" th:object="${sortForm}" method="post">
+						    <input type="text" class="text" th:field="*{name}"/>
+						    <input type="submit" value="苗字検索"/>
+						</form>
+					</div>
+						
+					<div class="head-button">
+		    			<input type="button" onclick="javascript:Register()" value="労働者登録"/>
+		    			<input type="button" onclick="javascript:ReturnIndex()" value="メニューに戻る"/>
+	    			</div>
+    			</div>
+	    	</div>
+				
+			<section class="employeeInfo">
+			<table class="tableList" border = "1" style="border-collapse: collapse;">
+				<thead>
+					<tr>
+						<th class = id>id</th>
+						<th class = name>労働者名</th>
+						<th class = requestFlg>入社年月日</th>
+						<th class = happyDays>有給残日数</th>
+						<th class = authority>権限</th>
+						<th class = attendance>労働日確認</th>
+						<th class = delete>削除</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="employee : ${employeeList}">
+						<td align = "center">
+							<form th:action="@{/EmployeeInfo/{id}(id=${employee.id})}" method="post">
+							<input type="submit" th:value="*{employee.id}"/>
+							</form>
+						</td>
+						<td align = "center" th:text="*{employee.last_name}+' '+*{employee.first_name}">
+						<td align = "center" th:text="*{employee.joined_year}"></td>
+						<td align = "center" th:text="*{employee.happy_days}"></td>
+						<td align = "center" th:text="*{employee.authority}"></td>
+						<td align = "center" >
+							<form th:action="@{/AllAttendanceCheck/{id}(id = *{employee.id})}" method="post">
+							<input type="submit" value="労働日確認"/>
+							</form>
+						</td>
+						<td align = "center" >
+							<form th:action="@{/EmployeeDelete}" th:object="${deleteForm}" method="post">
+								<input type="hidden" name="employeeId"  th:value="${employee.id}"/>
+								<input type="hidden" name="authorityId" th:value="${session.employeeForm.id}"/>
+							<input type="submit" value="削除"/>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</section>
+			
+			
+		</main>
+
+	</body>
+</html>

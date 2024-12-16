@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/request.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>登録画面</title>
+	</head>
+	<body>
+		<header>
+			<h1>新規労働者登録</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+		
+		<div class="alert" th:if="${reaction != null and reaction != ''}">
+			<h2 class="alert-comment" th:text="${reaction}"></h2>
+		</div><br>
+		
+		<div class="all-attendance">
+			<div class="second-Line">
+				<h2 class="second-one">社員情報</h2>
+				<h5 class="header-two">すべての項目は入力必須項目です</h5>
+			</div>
+			
+			<form id="register" th:action="@{/EmployeeRegistration/{id}(id=${session.employeeForm.id})}" th:object="${employeeForm}" method="post">
+				<br>
+				<div class="input-detail">
+					<h2>姓：</h2>
+					<input type="text" class="text"  th:field="*{last_name}">
+				</div><br>
+				
+				<div class="input-detail">
+					<h2>名：</h2>
+					<input type="text" class="text"  th:field="*{first_name}">
+				</div><br>
+				
+				<div class="input-detail">
+					<h2>入社年月日：</h2>
+					<input type="text" class="text"  placeholder="yyyy/MM/dd" th:field="*{joined_year}">
+				</div><br>
+				
+				<div class="input-detail">
+					<h2>権限：</h2>
+					<div class="dual-select">
+						<input type="radio" id="authority_0" th:field="*{authority}" value="0">
+						<label for="authority_0">一般権限</label>
+						
+						<input type="radio" id="authority_1" th:field="*{authority}" value="1">
+						<label for="authority_1">管理者権限</label>
+					</div>
+				</div><br>
+				
+				<div class="dual-button">
+					<input type="button" onclick="javascript:UserIndex()" value="戻る">
+					<input type="submit"  value="登録"/>
+				</div>
+			</form>
+		</div>
+			
+		
+		
+	</main>
+
+	</body>
+</html>

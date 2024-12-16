@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/request.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>労働者詳細</title>
+	</head>
+	<body>
+		<header>
+			<h1>労働者詳細</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="all-attendance">
+		
+				<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+				</div><br>
+				
+				<div class="second-Line">
+					<h2 class="second-one">社員情報</h2>
+				</div>
+				
+				<form id="register" th:action="@{'/UpdateForm/' + ${singleModel.id}}" th:object="${singleModel}" method="post">
+					<br>
+					<div class="input-detail">
+						<h3>労働者ID：<span th:text="*{id}"></span></h3>
+						<input type="hidden" class="text"  th:field="*{id}">
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>姓：<span th:text="*{last_name}"></span></h3>
+						<input type="hidden" class="text"  th:field="*{last_name}">
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>名：<span th:text="*{first_name}"></span></h3>
+						<input type="hidden" class="text"  th:field="*{first_name}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>入社年月日：<span th:text="*{joined_year}"></span></h3>
+						<input type="hidden" class="text" th:field="*{joined_year}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>残り有給日数：<span th:text="*{happy_days}"></span></h3>
+						<input type="hidden" class="text" th:field="*{happy_days}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>権限：<span th:text="*{authority}"></span></h3>
+						<input type="hidden" class="text" th:field="*{authority}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>登録者：<span th:text="*{created_by}"></span></h3>
+						<input type="hidden" class="text" th:field="*{created_by}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>更新者：<span th:text="*{updated_by}"></span></h3>
+						<input type="hidden" class="text" th:field="*{updated_by}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>登録日時：<span th:text="*{created_at}"></span></h3>
+						<input type="hidden" class="text" th:field="*{created_at}"  >
+					</div><br>
+					
+					<div class="input-detail">
+						<h3>登録日時：<span th:text="*{updated_at}"></span></h3>
+						<input type="hidden" class="text" th:field="*{updated_at}"  >
+					</div><br>
+					
+					<div class="dual-button">
+						<input type="button" onclick="javascript:UserIndex()" value="戻る">
+						<input type="submit"  value="更新画面に遷移"/>
+					</div>
+				</form>
+			</div>
+		
+	</main>
+
+</body>
+</html>

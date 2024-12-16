@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.button-list{
+	display: flex;
+	justify-content: space-between;
+}
+
+.head-element input{
+	font-size: 15px;
+    border-width: 1px;
+    margin-bottom: 1.1em;
+}
+
+.return{
+	float:right;
+}

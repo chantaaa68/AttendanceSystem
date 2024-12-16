@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>勤怠修正</title>
+		<script src="../JavaScript/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>勤怠修正</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="all-attendance">
+				
+				<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+				</div><br>
+				
+				<h2><span th:text="${requestModel.employee_name}"></span>さんの勤怠修正</h2>
+			
+				<form id="start" th:action="@{/AttendanceCorrection/{id}(id=${session.employeeForm.id})}" th:object="${attendanceModel}"  method="post">
+					
+					<input type="hidden" th:field="*{id}">
+					<input type="hidden" th:field="*{days}">
+					
+					<h2><span th:text="*{days}"></span>の勤怠は以下の通りです</h2>
+
+					<br>
+					<div class="result-detail">
+						<h4>退勤フラグ：</h4>
+						<select th:field="*{attendance_flg}">
+							<option value="0">出勤</option>
+							<option value="1">遅刻</option>
+							<option value="2">早退</option>
+							<option value="3">有給</option>
+							<option value="4">午前休</option>
+							<option value="5">午後休</option>
+							<option value="6">休暇</option>
+						</select>
+					</div><br>
+					
+					<div class="result-detail">
+						<h4>出勤時間：</h4>
+						<input type="text" class="text"  th:field="*{start_time}">
+					</div><br>
+					
+					<div class="result-detail">
+						<h4>休憩開始時間：</h4>
+						<input type="text" class="text"  th:field="*{rest_start_time}">
+					</div><br>
+					
+					<div class="result-detail">
+						<h4>休憩終了時間：</h4>
+						<input type="text" class="text"  th:field="*{rest_end_time}">
+					</div><br>
+					
+					<div class="result-detail">
+						<h4>退勤時間：</h4>
+						<input type="text" class="text"  th:field="*{end_time}">
+					</div><br>
+					
+					<div class="result-detail">
+						<h4>コメント：</h4>
+						<input type="text" class="text"  th:field="*{comment}">
+					</div><br>
+					
+					<input type="submit" value="修正"/>
+				</form>
+			</div>
+		</main>
+	
+	</body>
+</html>

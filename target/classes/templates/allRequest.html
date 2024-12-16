@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/list.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>労働者申請一覧</title>
+	</head>
+	<body>
+		<header>
+			<h1>労働者からの全申請一覧</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="head-element">
+				<div class="alert" th:if="${alert != null and alert != ''}">
+					<h2 class="alert-comment" th:text="${alert}"></h2>
+				</div><br>
+				
+				<div class="head-button">
+				<input class="return" type="button" onclick="javascript:ReturnIndex()" value="メニューに戻る"/>
+				</div>
+			</div>
+		
+			<section class="employeeInfo">
+				
+			<table class="tableList" border = "1" style="border-collapse: collapse;">
+				<thead>
+					<tr>
+						<th class = id>申請id</th>
+						<th class = name>申請者</th>
+						<th class = date>申請日</th>
+						<th class = requestFlg>申請内容</th>
+						<th class = reactionFlg>対応状況</th>
+						<th class = reactionId>対応者</th>
+						<th class = reactionDate>対応日</th>
+						<th class = Update>対応</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="request : ${AllRequestModel}" th:if="${request.employee_id != session.employeeForm.id}">
+						<td align = "center">
+							<form th:action="@{/AuthorityRequestInfo/{id}(id=${request.request_id})}" method="post">
+							<input type="submit" th:value="*{request.request_id}"/>
+							</form>
+						</td>
+						<td align = "center" th:text="*{request.employee_name}"></td>
+						<td align = "center" th:text="*{request.request_date}"></td>
+						<td align = "center" th:text="*{request.request_detail}"></td>
+						<td align = "center" th:text="*{request.reaction_detail}"></td>
+						<td align = "center" th:text="*{request.reaction_name}"></td>
+						<td align = "center" th:text="*{request.reaction_date}"></td>
+						<td align = "center" >
+							<form th:action="@{/RequestReactionForm/{id}(id = *{request.request_id})}" method="post">
+							<input type="submit" value="対応"/>
+							</form>
+						</td>
+					</tr>
+				</tbody>
+				
+
+			</table>
+			</section>
+			
+			
+		</main>
+	
+
+	</body>
+</html>

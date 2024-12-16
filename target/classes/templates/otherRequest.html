@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/request.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>有給申請</title>
+	</head>
+	<body>
+		<header>
+			<h1><span th:text="${session.employeeForm.first_name}"></span>さんの申請フォーム</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="all-attendance">
+				
+				<div class="head-element">
+					<div class="alert" th:if="${alert != null and alert != ''}">
+						<h2 class="alert-comment" th:text="${alert}"></h2>
+					</div><br>
+				</div>
+				
+				<form id="start" th:action="@{/RequestCheck/{id}(id=${session.employeeForm.id})}" th:object="${requestForm}"  method="post">
+					
+					<div class="request">
+						<div class="request-detail">
+							<h2>対象日：</h2>
+							<input type="date" class="text"  th:field="*{selected_date}"
+							placeholder="指定がない場合は空白のままでOK">
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請区分：</h2>
+							<select class="text" th:field="*{request_flg}">
+								<option value="0">打刻修正依頼</option>
+								<option value="1">登録情報更新</option>
+								<option value="2">ユーザー登録依頼</option>
+							</select>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請理由：</h2>
+							<input type="text" class="text"  th:field="*{request_reason}">
+						</div><br>
+					</div>
+					
+					<div class="dual-button">
+						<input type="button" onclick="javascript:ReturnIndex()" value="戻る"/>
+						<input type="submit" value="申請する"/>
+					</div>
+				</form>
+			</div>
+			
+		</main>
+	</body>
+</html>

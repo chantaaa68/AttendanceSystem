@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/list.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>勤怠履歴確認</title>
+	</head>
+	<body>
+		<header>
+			<h1>勤怠履歴確認</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			
+			<div class="head-element">
+				<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+				</div><br>
+				
+				<div class="button-list">
+					<form class="sort" th:action="@{/MonthlyAttendanceCheck}" th:object="${historyCheckForm}" method="post">
+					    <input type="hidden" name="id" th:value="${session.employeeForm.id}">
+					    
+						<select th:field="*{year}">
+							<option value="">------</option>
+							<option value="2022">2022年</option>
+							<option value="2023">2023年</option>
+							<option value="2024">2024年</option>
+							<option value="2025">2025年</option>
+							<option value="2026">2026年</option>
+						</select>
+						
+						<select th:field="*{month}">
+							<option value="">------</option>
+							<option value="01">1月</option>
+							<option value="02">2月</option>
+							<option value="03">3月</option>
+							<option value="04">4月</option>
+							<option value="05">5月</option>
+							<option value="06">6月</option>
+							<option value="07">7月</option>
+							<option value="08">8月</option>
+							<option value="09">9月</option>
+							<option value="10">10月</option>
+							<option value="11">11月</option>
+							<option value="12">12月</option>
+						</select>
+					    
+					    <input type="submit" value="勤怠検索"/>
+					</form>
+					
+					<input class="return" type="button" onclick="javascript:ReturnIndex()" value="メニューに戻る"/>
+					
+    			</div>
+	    	</div>
+				
+			<section class="employeeInfo">
+			<table class="tableList" border = "1" style="border-collapse: collapse;">
+				<thead>
+					<tr>
+						<th class = days>日付</th>
+						<th class = startTime>始業時間</th>
+						<th class = restStartTime>休憩開始時間</th>
+						<th class = restEndTime>休憩終了時間</th>
+						<th class = endTime>終業時間</th>
+						<th class = totalTime>総労働時間</th>
+						<th class = additionalTime>残業時間</th>
+						<th class = restTime>休憩時間</th>
+						<th class = attendance>勤怠区分</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					<tr th:each="attendance : ${attendanceList}">
+						<td align = "center" th:text="*{attendance.days}"></td>
+						<td align = "center" th:text="*{attendance.start_time}"></td>
+						<td align = "center" th:text="*{attendance.rest_start_time}"></td>
+						<td align = "center" th:text="*{attendance.rest_end_time}"></td>
+						<td align = "center" th:text="*{attendance.end_time}"></td>
+						<td align = "center" th:text="*{attendance.work_total_time}"></td>
+						<td align = "center" th:text="*{attendance.additional_total_time}"></td>
+						<td align = "center" th:text="*{attendance.rest_total_time}"></td>
+						<td align = "center" th:text="*{attendance.attendance_flg}"></td>
+					</tr>
+				</tbody>
+			</table>
+			</section>
+			
+			
+		</main>
+
+	</body>
+</html>

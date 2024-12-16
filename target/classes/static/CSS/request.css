@@ -1,0 +1,70 @@
+@charset "UTF-8";
+
+/*申請内容に関して*/
+.request-detail{
+	display: flex;
+	justify-content: center;
+	width:600px;
+	height: 50px;
+}
+
+.request-detail h2{
+	width:200px;
+	margin-top:auto;
+	margin-bottom: auto;
+	text-align: right;
+}
+
+.input-detail h2{
+	width:200px;
+	margin-top:auto;
+	margin-bottom: auto;
+	text-align: right;
+}
+
+.text{
+	width:250px;
+}
+
+.all-attendance{
+    display: flex;
+    margin-top: 2em;
+    border: solid 3px;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.request{
+	display: flex;
+  	flex-direction: column;
+}
+
+.dual-button{
+	float:right;
+	margin-bottom: 1.1em;
+}
+
+.input-detail{
+	display: flex;
+	justify-content: center;
+	height: 50px;
+}
+
+#register{
+	width:600px;
+}
+
+form .dual-button input{
+	height:3em;
+	font-size: 15px;
+}
+
+.dual-select{
+	margin-top: 10px;
+}
+
+label{
+	font-size: 22px;
+}

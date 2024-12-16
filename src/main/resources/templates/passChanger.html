@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/index.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>パスワード変更画面</title>
+	</head>
+	<body>
+		<header>
+			<h1>パスワード変更</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			
+			<div class="head-element">
+				<div class="alert" th:if="${passReaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${passReaction}"></h2>
+				</div><br>
+			</div>
+			
+			<form class="button" th:action="@{/PassCheck/{id}(id=${session.loginForm.id})}"th:object="${passwordForm}" method="post">
+				
+				<h2>新しいパスワードを入力してください</h2>
+				<input type="text" th:field="*{password}"/>
+				
+				<h2>もう一度パスワードを入力してください</h2>
+				<input type="text" th:field="*{passwordCheck}"/>
+				
+	    		<input type="submit" value="更新"/>
+			</form>
+			
+			
+
+	</body>
+</html>

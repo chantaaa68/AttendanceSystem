@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/index.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>勤怠メニュー</title>
+	</head>
+	<body>
+		<header>
+			<h1>こんにちは <span th:text="${session.employeeForm.first_name}"></span></h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			
+			<div class="head-element">
+				<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+					<h2 class="alert-comment" th:text="*{commonReaction}"></h2>
+				</div><br>
+				
+				<div  class="authority-button" th:if="${session.employeeForm.authority}">
+					
+					<h2>管理者権限メニュー</h2>
+		    			<input type="button" onclick="javascript:RequestIndex()" value="管理者メニュー"/>
+		    			<input type="button" onclick="javascript:UserIndex()" value="労働者一覧"/>
+				</div>
+				
+				<div class="attendances">
+					<br>
+					<form class="button" th:action="@{/Start/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="勤務開始"/>
+					</form>
+					
+					<form class="button" th:action="@{/RestStart/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="休憩開始"/>
+					</form>
+					
+					<form class="button" th:action="@{/RestEnd/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="休憩終了"/>
+					</form>
+					
+					<form class="button" th:action="@{/End/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="勤務終了"/>
+					</form>
+				</div>
+			</div>
+			
+			<div class="double-element">
+				<div class="all-attendance">
+					<h2 class="attendance-title">本日の勤怠一覧</h2>
+					
+					<div class="attendance-time" th:if="${attendanceModel != null and not #strings.isEmpty(attendanceModel.start_time)}">
+						<h3 class="time">勤務開始時刻 :</h3>
+						<h3 th:text="${attendanceModel.start_time}"></h3>
+					</div>
+					
+					<div class="attendance-time" th:if="${attendanceModel != null and not #strings.isEmpty(attendanceModel.rest_start_time)}">
+						<h3 class="time">休憩開始時刻 :</h3>
+						<h3 th:text="${attendanceModel.rest_start_time}"></h3>
+					</div>
+					
+					<div class="attendance-time" th:if="${attendanceModel != null and not #strings.isEmpty(attendanceModel.rest_end_time)}">
+						<h3 class="time">休憩終了時刻 :</h3>
+						<h3 th:text="${attendanceModel.rest_end_time}"></h3>
+					</div>
+					
+					<div class="attendance-time" th:if="${attendanceModel != null and not #strings.isEmpty(attendanceModel.end_time)}">
+						<h3 class="time">勤務終了時刻 :</h3>
+						<h3 th:text="${attendanceModel.end_time}"></h3>
+					</div>
+				</div>
+				
+				<div class="other-button">
+					<form class="button" th:action="@{/AllAttendanceCheck/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="勤怠確認"/>
+					</form>
+					
+					<form class="button" th:action="@{/AllRequestCheck/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="申請一覧"/>
+					</form>
+					
+					<form class="button" th:action="@{/HappyRequest/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="有給申請"/>
+					</form>
+					
+					<form class="button" th:action="@{/OtherRequest/{id}(id=${session.employeeForm.id})}" method="post">
+			    		<input type="submit" value="各種申請"/>
+					</form>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

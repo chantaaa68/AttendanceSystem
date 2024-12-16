@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/request.css">
+		<script src="../JavaScript/common.js"></script>
+		<title>有給申請</title>
+	</head>
+	<body>
+		<header>
+			<h1><span th:text="${session.employeeForm.first_name}"></span>さんの有給申請フォーム</h1>
+			<div class="dual-button">
+				<input type="button" onclick="javascript:PassChanger()" value="パスワード変更"/>
+				<input type="button" onclick="javascript:Logout()" value="ログアウト"/>
+			</div>
+		</header>
+		
+		<main>
+			<div class="all-attendance">
+				
+				<div class="head-element">
+					<div class="alert" th:if="${alert != null and alert != ''}">
+						<h2 class="alert-comment" th:text="${alert}"></h2>
+					</div><br>
+				</div>
+				
+				<form id="start" th:action="@{/RequestCheck/{id}(id=${session.employeeForm.id})}" th:object="${requestForm}"  method="post">
+					
+					<div class="request">
+						<div class="request-detail">
+							<h2>有給取得希望日：</h2>
+							<input type="date" class="text"  th:field="*{selected_date}">
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>有給区分：</h2>
+							<select class="text" th:field="*{request_flg}">
+								<option value="3">有給</option>
+								<option value="4">午前休</option>
+								<option value="5">午後休</option>
+								<option value="6">後日有給申請</option>
+							</select>
+						</div><br>
+						
+						<div class="request-detail">
+							<h2>申請理由：</h2>
+							<input type="text" class="text"  th:field="*{request_reason}">
+						</div><br>
+					</div>
+					
+					<div class="dual-button">
+						<input type="button" onclick="javascript:ReturnIndex()" value="戻る"/>
+						<input type="submit" value="申請する"/>
+					</div>
+				</form>
+			</div>
+			
+		</main>
+	</body>
+</html>

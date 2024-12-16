@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Insert title here</title>
+				<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+				<link rel="stylesheet" type="text/css" href="../CSS/attendanceChenk.css">
+		<script src="../JavaScript/common.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>退勤成功！</h1>
+			<h1> <span th:text="${session.employeeForm.first_name}"></span>さん、一日お疲れ様！</h1>
+		</header>
+		
+		<main>
+		<div class="all-attendance">
+			<div class="alert" th:if="${reaction != null and reaction != ''}">
+					<h2 class="alert-comment" th:text="${reaction}"></h2>
+			</div><br>
+			
+		<form id="start" th:action="@{/ToConfirm/{id}(id=${session.employeeForm.id})}" th:object="${attendanceModel}"  method="post">
+			
+			<input type="hidden" th:field="*{id}">
+			<input type="hidden" th:field="*{days}">
+			
+			<div class="head-element">
+				<h2><span th:text="*{days}"></span>の勤怠は以下の通りです。</h2>
+				<h2>勤怠項目を選択し、必要ならば編集・コメントもお願いします。</h2>
+			</div>
+
+			<br>
+			<div class="result-detail">
+				<h3>退勤フラグ：</h3>
+				<select th:field="*{attendance_flg}">
+					<option value="0">出勤</option>
+					<option value="1">遅刻</option>
+					<option value="2">早退</option>
+					<option value="3">有給</option>
+					<option value="4">午前休</option>
+					<option value="5">午後休</option>
+				</select>
+			</div><br>
+			
+			<div class="result-detail">
+				<h3>出勤時間：</h3>
+				<input type="text" class="text"  th:field="*{start_time}">
+			</div><br>
+			
+			<div class="result-detail">
+				<h3>休憩開始時間：</h3>
+				<input type="text" class="text"  th:field="*{rest_start_time}">
+			</div><br>
+			
+			<div class="result-detail">
+				<h3>休憩終了時間：</h3>
+				<input type="text" class="text"  th:field="*{rest_end_time}">
+			</div><br>
+			
+			<div class="result-detail">
+				<h3>退勤時間：</h3>
+				<input type="text" class="text"  th:field="*{end_time}">
+			</div><br>
+			
+			<div class="result-detail">
+				<h3>コメント：</h3>
+				<input type="text" class="text"  th:field="*{comment}">
+			</div><br>
+			
+			<div class="finish-button">
+			<input type="submit" value="最終確定"/>
+			</div>
+		</form>
+		</div>
+		</main>
+	
+	</body>
+</html>

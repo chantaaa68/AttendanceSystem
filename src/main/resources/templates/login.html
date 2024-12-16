@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="../CSS/common.css">
+		<link rel="stylesheet" type="text/css" href="../CSS/login.css">
+		<title>Insert title here</title>
+	</head>
+	<body>
+		
+		<header>
+			<h1>勤怠登録システム</h1>
+		</header>
+		
+		<main>
+			<div class="head-element">
+				<h2 class="alert" th:text="${alert}"></h2>
+				
+				<form id="login" th:action="@{/Index}" th:object="${LoginForm}" method="post">
+				
+					<div class="login-elements">
+						<h2>IDを入力してね : </h2>
+						<input type="text" class="input-box" th:field="*{id}"/>
+					</div>
+					
+					<div class="login-elements">
+						<h2>パスワードを入力してね : </h2>
+						<input type="text" class="input-box" th:field="*{password}"/>
+					</div>
+				
+					<input type="submit" class="login-button" value="ログイン"/>
+				
+				</form>
+			</div>
+			
+			
+		</main>
+	
+	</body>
+</html>

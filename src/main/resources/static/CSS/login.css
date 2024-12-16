@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+
+.login-elements{
+	display: flex;
+	justify-content: center;
+}
+
+.login-elements h2{
+	text-align: right;
+	width:300px;
+}
+
+.login-elements input{
+	height: 40px;
+    margin-top: 1.1em;
+}
+
+#login{
+	width:80%;
+	margin: 0 auto;
+}
+
+.login-button{
+	width: 6em;
+    height: 3em;
+    float: right;
+    font-size: 18px;
+    margin-top: 1.2em;
+}

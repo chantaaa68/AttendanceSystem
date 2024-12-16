@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+/*ヘッダーの内容*/
+
+header{
+	display: flex;
+	justify-content: space-between;
+	border-bottom:solid;
+	border-color:rgb(128, 128, 128);
+	border-width:1.1ex;
+	width:900px;
+	margin: 0 auto;
+}
+
+header input{
+	font-size: 18px;
+    height: 3em;
+    border-width: 1px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+h1{
+	margin-bottom: 0px;
+}
+
+/*アラート表記に関して*/
+
+.alert{
+	float:left;
+}
+
+/*main内に関して*/
+
+main{
+	width:800px;
+	margin: 0 auto;
+}
+
+.head-element{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.alert-comment{
+	display: flex;
+    justify-content: center;
+}
+
+section{
+	justify-content: center;
+    display: flex;
+}
+
+table{
+	width:800px;
+}
+
+
+
+
+
+
+
